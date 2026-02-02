@@ -2,9 +2,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebas
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } 
        from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-// YOUR CONFIG HERE (The one you found in Project Settings)
-
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// 1. Palmy Team Firebase Configuration
 const firebaseConfig = {
   apiKey: "AIzaSyADMGwj9tdJXBQuVdgP1qnk1PhRgWckXoI",
   authDomain: "finnhub-fc8d8.firebaseapp.com",
@@ -15,11 +13,47 @@ const firebaseConfig = {
   measurementId: "G-L3YBMNLXM5"
 };
 
-// Initialize Firebase
+// 2. Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// --- LOGIN LOGIC ---
+// 3. Auth Observer: Controls UI based on Login State
+onAuthStateChanged(auth, (user) => {
+    const authStatus = document.getElementById('auth-status');
+    const adminDashboard = document.getElementById('admin-dashboard');
+
+    if (user) {
+        // --- LOGGED IN ---
+        console.log("Active Session:", user.email);
+        
+        if (authStatus) {
+            authStatus.innerHTML = `<a href="#" id="logout-btn" style="color: #ef4444; font-weight: bold;">Logout</a>`;
+            
+            document.getElementById('logout-btn').addEventListener('click', (e) => {
+                e.preventDefault();
+                signOut(auth).then(() => {
+                    window.location.href = "index.html"; 
+                });
+            });
+        }
+
+        if (adminDashboard) {
+            adminDashboard.style.display = "block";
+        }
+
+    } else {
+        // --- LOGGED OUT ---
+        if (authStatus) {
+            authStatus.innerHTML = `<a href="login.html" class="login-link">Team Login</a>`;
+        }
+        
+        if (adminDashboard) {
+            adminDashboard.style.display = "none";
+        }
+    }
+});
+
+// 4. Login Form Logic (Runs on login.html)
 const loginForm = document.getElementById('login-form');
 if (loginForm) {
     loginForm.addEventListener('submit', (e) => {
@@ -29,24 +63,5 @@ if (loginForm) {
         const message = document.getElementById('auth-message');
 
         signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                message.innerText = "Login Successful! Redirecting...";
-                window.location.href = "index.html"; // Send them home after login
-            })
-            .catch((error) => {
-                message.style.color = "#ef4444";
-                message.innerText = "Error: " + error.message;
-            });
-    });
-}
-
-// --- CHECK IF USER IS LOGGED IN ---
-onAuthStateChanged(auth, (user) => {
-    const navLinks = document.querySelector('.nav-links');
-    if (user) {
-        console.log("Logged in as:", user.email);
-        // If logged in, you could add a "Logout" button or "Admin" link here
-    } else {
-        console.log("No user signed in.");
-    }
-});
+            .then(() => {
+                message.style.color = "#38b
