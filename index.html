@@ -3,39 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Palmy Dev Team</title>
+    <title>Palmy Dev Team | Home</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="logo">Palmy<span>Dev</span></div>
-        <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#team">Team</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
+    <header class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">Palmy<span>Dev</span></a>
+            
+            <nav>
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="private.html">Privacy</a></li>
+                    <li><a href="term.html">Terms</a></li>
+                    <li id="auth-status"><a href="login.html" class="login-link">Team Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
     <main>
-        <section id="home" class="hero">
-            <h1>Building the Future with Palmy</h1>
-            <p>We create high-performance web solutions.</p>
-            <button id="cta-btn">Get Started</button>
+        <section class="hero">
+            <div class="container">
+                <h1>Code. Build. <span class="accent">Deploy.</span></h1>
+                <p>Official portal for the Palmy Development Team.</p>
+                <div class="hero-btns">
+                    <button class="btn primary">View Projects</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="admin-dashboard" class="container" style="display: none; margin-top: 50px; padding: 40px; background: #1e293b; border-radius: 12px; border: 1px dashed #38bdf8;">
+            <h2 style="color: #38bdf8;">Team Dashboard</h2>
+            <p>Welcome back, Palmy Member! You have access to private tools.</p>
+            <div style="margin-top: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div style="background: #0f172a; padding: 20px; border-radius: 8px;">
+                    <h4>Project Stats</h4>
+                    <p style="font-size: 0.8rem; color: #94a3b8;">Firebase Connection: Active</p>
+                </div>
+                <div style="background: #0f172a; padding: 20px; border-radius: 8px;">
+                    <h4>Active Tasks</h4>
+                    <p style="font-size: 0.8rem; color: #94a3b8;">Reviewing GitHub Pull Requests</p>
+                </div>
+            </div>
         </section>
     </main>
 
     <footer class="footer">
-    <p>&copy; 2026 Palmy Development Team. All rights reserved.</p>
-    <div class="footer-links">
-        <a href="privacy.html">Privacy Policy</a> | 
-        <a href="terms.html">Terms of Service</a>
-    </div>
-    <div class="socials">
-        <a href="#">GitHub</a>
-    </div>
-</footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h3>Palmy Dev</h3>
+                    <p>Secured by Google Firebase.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Legal</h4>
+                    <a href="private.html">Privacy Policy</a>
+                    <a href="term.html">Terms of Service</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Palmy Development Team</p>
+            </div>
+        </div>
+    </footer>
 
     <script type="module" src="script.js"></script>
 </body>
